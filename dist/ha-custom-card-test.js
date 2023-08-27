@@ -12,7 +12,7 @@ class HaCustomTestCard extends HTMLElement {
         this.content = this.querySelector("div");
       }
   
-      const entityId = this.config.entity;
+      const entityId = predbat.status;
       const state = hass.states[entityId];
       const stateStr = state ? state.state : "unavailable";
   
