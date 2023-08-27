@@ -5,7 +5,7 @@ class HaCustomTestCard extends HTMLElement {
       // Initialize the content if it's not there yet.
       if (!this.content) {
         this.innerHTML = `
-          <ha-card header="Example-card">
+          <ha-card header="Predbat Entities">
             <div class="card-content"></div>
           </ha-card>
         `;
