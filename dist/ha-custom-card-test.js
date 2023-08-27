@@ -40,4 +40,9 @@ class HaCustomTestCard extends HTMLElement {
   }
   
   customElements.define("content-card-example", ContentCardExample);
-  
+  window.customCards.push({
+    type: 'content-card-example',
+    name: 'Iain Test Card',
+    preview: false,
+    description: 'This card displays stuff',
+  });
