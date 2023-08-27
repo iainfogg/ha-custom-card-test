@@ -13,6 +13,7 @@ class HaCustomTestCard extends HTMLElement {
       }
   
       const entityId = 'predbat.status';
+      console.log(entityId);
       const state = hass.states[entityId];
       const stateStr = state ? state.state : "unavailable";
   
