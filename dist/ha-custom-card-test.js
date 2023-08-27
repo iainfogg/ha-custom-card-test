@@ -39,7 +39,7 @@ class HaCustomTestCard extends HTMLElement {
     }
   }
   
-  customElements.define("ha-custom-card-test", ContentCardExample);
+  customElements.define("ha-custom-card-testX", ContentCardExample);
   window.customCards.push({
     type: 'ha-custom-card-test',
     name: 'Iain Test Card',
