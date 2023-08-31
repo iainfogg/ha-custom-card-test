@@ -17,7 +17,7 @@ class HaCustomTestCard2 extends HTMLElement {
       const stateStr = state ? state.state : "unavailable";
   
       this.content.innerHTML = `
-        The state of ${entityId} is ${stateStr}!
+        The state of ${entityId} is ${stateStr}.
         <br><br>
         <img src="http://via.placeholder.com/350x150">
       `;
