@@ -41,7 +41,7 @@ class HaCustomTestCard2 extends HTMLElement {
   
   customElements.define('ha-custom-card-test2', HaCustomTestCard2); 
   window.customCards.push({
-    type: 'ha-custom-card-test',
+    type: 'ha-custom-card-test2',
     name: 'Iain Test Card 2',
     preview: false,
     description: 'This card displays stuff 2',
