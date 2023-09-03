@@ -102,23 +102,64 @@ class HaCustomTestCard2 extends HTMLElement {
 class StrategyDemo {
 
   static async generateDashboard(info) {
+    // Query all data we need. We will make it available to views by storing it in strategy options.
+    const [areas, devices, entities] = await Promise.all([
+      info.hass.callWS({ type: "config/area_registry/list" }),
+      info.hass.callWS({ type: "config/device_registry/list" }),
+      info.hass.callWS({ type: "config/entity_registry/list" }),
+    ]);
 
+    // Each view is based on a strategy so we delay rendering until it's opened
     return {
-      title: "Generated Dashboard",
-      views: [
-        {
-          "cards": [
-            {
-              "type": "markdown",
-              "content": `Generated at ${(new Date).toLocaleString()}`
-            }
-          ]
-        }
-      ]
+      views: areas.map((area) => ({
+        strategy: {
+          type: "custom:my-demo",
+          options: { area, devices, entities },
+        },
+        title: area.name,
+        path: area.area_id,
+      })),
     };
-
   }
 
+  static async generateView(info) {
+    const { area, devices, entities } = info.view.strategy.options;
+
+    const areaDevices = new Set();
+
+    // Find all devices linked to this area
+    for (const device of devices) {
+      if (device.area_id === area.area_id) {
+        areaDevices.add(device.id);
+      }
+    }
+
+    const cards = [];
+
+    // Find all entities directly linked to this area
+    // or linked to a device linked to this area.
+    for (const entity of entities) {
+      if (
+        entity.area_id
+          ? entity.area_id === area.area_id
+          : areaDevices.has(entity.device_id)
+      ) {
+        cards.push({
+          type: "button",
+          entity: entity.entity_id,
+        });
+      }
+    }
+
+    return {
+      cards: [
+        {
+          type: "grid",
+          cards,
+        },
+      ],
+    };
+  }
 }
 
 customElements.define("ll-strategy-my-demo", StrategyDemo);
