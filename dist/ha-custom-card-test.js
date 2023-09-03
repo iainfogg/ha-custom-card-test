@@ -97,3 +97,28 @@ class HaCustomTestCard2 extends HTMLElement {
      preview: false, 
      description: 'This card displays stuff 2', 
    });
+
+
+class StrategyDemo {
+
+  static async generateDashboard(info) {
+
+    return {
+      title: "Generated Dashboard",
+      views: [
+        {
+          "cards": [
+            {
+              "type": "markdown",
+              "content": `Generated at ${(new Date).toLocaleString()}`
+            }
+          ]
+        }
+      ]
+    };
+
+  }
+
+}
+
+customElements.define("ll-strategy-my-demo", StrategyDemo);
