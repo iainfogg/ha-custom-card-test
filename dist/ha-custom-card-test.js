@@ -123,146 +123,125 @@ class PredbatCharts {
   }
 
   static async generateView(info) {
-    const { area, devices, entities } = info.view.strategy.options;
-
-    const areaDevices = new Set();
-
-    // Find all devices linked to this area
-    for (const device of devices) {
-      if (device.area_id === area.area_id) {
-        areaDevices.add(device.id);
-      }
-    }
-
     const cards = [];
 
-    // Find all entities directly linked to this area
-    // or linked to a device linked to this area.
-    for (const entity of entities) {
-      if (
-        entity.area_id
-          ? entity.area_id === area.area_id
-          : areaDevices.has(entity.device_id)
-      ) {
-        cards.push({
-          "type": "custom:apexcharts-card",
-          "header": {
-             "show": true,
-             "title": "Home Battery Prediction",
-             "show_states": true,
-             "colorize_states": true
+    cards.push({
+      "type": "custom:apexcharts-card",
+      "header": {
+          "show": true,
+          "title": "Home Battery Prediction",
+          "show_states": true,
+          "colorize_states": true
+      },
+      "graph_span": "52h",
+      "span": {
+          "start": "minute",
+          "offset": "-12h"
+      },
+      "now": {
+          "show": true
+      },
+      "yaxis": [
+          {
+            "min": 0,
+            "max": 9.54
+          }
+      ],
+      "series": [
+          {
+            "entity": "predbat.soc_kw_h0",
+            "stroke_width": 1,
+            "curve": "smooth",
+            "name": "actual",
+            "extend_to": "now",
+            "show": {
+                "in_header": "raw"
+            }
           },
-          "graph_span": "52h",
-          "span": {
-             "start": "minute",
-             "offset": "-12h"
+          {
+            "entity": "predbat.soc_kw",
+            "stroke_width": 1,
+            "curve": "smooth",
+            "name": "base",
+            "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
+            "show": {
+                "in_header": "raw"
+            }
           },
-          "now": {
-             "show": true
+          {
+            "entity": "predbat.soc_kw_best",
+            "stroke_width": 2,
+            "curve": "smooth",
+            "name": "best",
+            "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
+            "show": {
+                "in_header": "raw"
+            }
           },
-          "yaxis": [
-             {
-                "min": 0,
-                "max": 9.54
-             }
-          ],
-          "series": [
-             {
-                "entity": "predbat.soc_kw_h0",
-                "stroke_width": 1,
-                "curve": "smooth",
-                "name": "actual",
-                "extend_to": "now",
-                "show": {
-                   "in_header": "raw"
-                }
-             },
-             {
-                "entity": "predbat.soc_kw",
-                "stroke_width": 1,
-                "curve": "smooth",
-                "name": "base",
-                "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
-                "show": {
-                   "in_header": "raw"
-                }
-             },
-             {
-                "entity": "predbat.soc_kw_best",
-                "stroke_width": 2,
-                "curve": "smooth",
-                "name": "best",
-                "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
-                "show": {
-                   "in_header": "raw"
-                }
-             },
-             {
-                "entity": "predbat.soc_kw_best10",
-                "stroke_width": 1,
-                "curve": "smooth",
-                "name": "best10",
-                "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
-                "show": {
-                   "in_header": "raw"
-                }
-             },
-             {
-                "entity": "predbat.best_charge_limit_kw",
-                "stroke_width": 1,
-                "curve": "stepline",
-                "name": "charge_limit_best",
-                "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
-                "show": {
-                   "in_header": "raw"
-                }
-             },
-             {
-                "entity": "predbat.charge_limit_kw",
-                "stroke_width": 1,
-                "curve": "stepline",
-                "name": "charge_limit_base",
-                "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
-                "show": {
-                   "in_header": "raw"
-                }
-             },
-             {
-                "entity": "predbat.best_discharge_limit_kw",
-                "stroke_width": 1,
-                "curve": "stepline",
-                "name": "discharge_best",
-                "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
-                "show": {
-                   "in_header": "raw"
-                }
-             },
-             {
-                "entity": "predbat.record",
-                "stroke_width": 2,
-                "curve": "stepline",
-                "name": "record",
-                "type": "column",
-                "color": "black",
-                "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
-                "show": {
-                   "in_header": "raw"
-                }
-             },
-             {
-                "entity": "predbat.soc_kw_base10",
-                "stroke_width": 1,
-                "curve": "smooth",
-                "name": "base10",
-                "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
-                "show": {
-                   "in_header": "raw"
-                }
-             }
-          ]
-       });
-      }
-    }
+          {
+            "entity": "predbat.soc_kw_best10",
+            "stroke_width": 1,
+            "curve": "smooth",
+            "name": "best10",
+            "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
+            "show": {
+                "in_header": "raw"
+            }
+          },
+          {
+            "entity": "predbat.best_charge_limit_kw",
+            "stroke_width": 1,
+            "curve": "stepline",
+            "name": "charge_limit_best",
+            "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
+            "show": {
+                "in_header": "raw"
+            }
+          },
+          {
+            "entity": "predbat.charge_limit_kw",
+            "stroke_width": 1,
+            "curve": "stepline",
+            "name": "charge_limit_base",
+            "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
+            "show": {
+                "in_header": "raw"
+            }
+          },
+          {
+            "entity": "predbat.best_discharge_limit_kw",
+            "stroke_width": 1,
+            "curve": "stepline",
+            "name": "discharge_best",
+            "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
+            "show": {
+                "in_header": "raw"
+            }
+          },
+          {
+            "entity": "predbat.record",
+            "stroke_width": 2,
+            "curve": "stepline",
+            "name": "record",
+            "type": "column",
+            "color": "black",
+            "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
+            "show": {
+                "in_header": "raw"
+            }
+          },
+          {
+            "entity": "predbat.soc_kw_base10",
+            "stroke_width": 1,
+            "curve": "smooth",
+            "name": "base10",
+            "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
+            "show": {
+                "in_header": "raw"
+            }
+          }
+      ]
+    });
 
     return {
       cards: [
