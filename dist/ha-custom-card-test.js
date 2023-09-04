@@ -101,27 +101,6 @@ class HaCustomTestCard2 extends HTMLElement {
 
 class PredbatCharts {
 
-  static async generateDashboard(info) {
-    // Query all data we need. We will make it available to views by storing it in strategy options.
-    const [areas, devices, entities] = await Promise.all([
-      info.hass.callWS({ type: "config/area_registry/list" }),
-      info.hass.callWS({ type: "config/device_registry/list" }),
-      info.hass.callWS({ type: "config/entity_registry/list" }),
-    ]);
-
-    // Each view is based on a strategy so we delay rendering until it's opened
-    return {
-      views: areas.map((area) => ({
-        strategy: {
-          type: "custom:my-demo",
-          options: { area, devices, entities },
-        },
-        title: area.name,
-        path: area.area_id,
-      })),
-    };
-  }
-
   static async generateView(info) {
     const cards = [];
 
