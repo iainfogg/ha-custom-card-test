@@ -120,4 +120,4 @@ class PredbatCharts {
   }
 }
 
-customElements.define("predbat-charts-view", PredbatCharts);
+customElements.define("ll-strategy-predbat-charts-view", PredbatCharts);
