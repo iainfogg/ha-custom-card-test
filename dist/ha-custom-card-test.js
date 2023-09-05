@@ -121,3 +121,24 @@ class PredbatCharts {
 }
 
 customElements.define("ll-strategy-predbat-charts-view", PredbatCharts);
+
+
+class StrategyDemo {
+
+  static async generateView(info) {
+
+    return {
+      "cards": [
+        {
+          "type": "markdown",
+          "content": `Generated at ${(new Date).toLocaleString()}`
+        }
+      ]
+    };
+
+  }
+
+}
+
+customElements.define("ll-strategy-my-demo", StrategyDemo);
+
