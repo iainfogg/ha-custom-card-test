@@ -208,17 +208,16 @@ class PredbatCharts {
             "show": {
                "in_header": "raw"
             }
-         },
-         {
-            "entity": "predbat.soc_kw_base10",
-            "stroke_width": 1,
-            "curve": "smooth",
-            "name": "base10",
-            "data_generator": "let res = []; for (const [key, value] of Object.entries(entity.attributes.results)) { res.push([new Date(key).getTime(), value]); } return res.sort((a, b) => { return a[0] - b[0]  })\n",
-            "show": {
-               "in_header": "raw"
-            }
          }
+
+
+
+
+
+
+
+
+
       ]
 
 
