@@ -215,7 +215,6 @@ class PredbatCharts {
     return {
       cards: [
         {
-          "type": "masonry",
           cards,
         },
       ],
