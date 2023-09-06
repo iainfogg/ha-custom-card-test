@@ -209,18 +209,7 @@ class PredbatCharts {
                "in_header": "raw"
             }
          }
-
-
-
-
-
-
-
-
-
       ]
-
-
     });
 
     return {
