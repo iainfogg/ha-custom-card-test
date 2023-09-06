@@ -222,7 +222,7 @@ class PredbatCharts {
     };
   }
 }
-
+ 
 customElements.define("ll-strategy-predbat-charts-view", PredbatCharts);
 
 
