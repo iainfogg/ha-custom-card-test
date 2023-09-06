@@ -123,7 +123,7 @@ class PredbatCharts {
       "yaxis": [
          {
             "min": 0,
-            "max": 9.54
+            "max": 20
          }
       ],
       "series": [
