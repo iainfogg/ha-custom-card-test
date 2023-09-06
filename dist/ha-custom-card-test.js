@@ -213,11 +213,7 @@ class PredbatCharts {
     });
 
     return {
-      cards: [
-        {
-          cards,
-        },
-      ],
+      cards: cards
     };
   }
 }
