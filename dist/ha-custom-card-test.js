@@ -106,7 +106,6 @@ class PredbatCharts {
 
     cards.push({
       "type": "custom:apexcharts-card",
-
       "apex_config": {
         "chart": {
           "height": "500px"
