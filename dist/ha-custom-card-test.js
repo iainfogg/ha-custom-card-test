@@ -106,6 +106,12 @@ class PredbatCharts {
 
     cards.push({
       "type": "custom:apexcharts-card",
+
+      "apex_config": {
+        "chart": {
+          "height": "500px"
+        },
+      },
       "header": {
          "show": true,
          "title": "Home Battery Prediction",
