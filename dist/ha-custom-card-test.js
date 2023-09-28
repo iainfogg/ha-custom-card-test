@@ -32,6 +32,7 @@ class HaCustomTestCard extends HTMLElement {
     // } 
     this.config = config; 
   } 
+  
   // The height of your card. Home Assistant uses this to automatically
   // distribute all cards over the available columns.
   getCardSize() {
