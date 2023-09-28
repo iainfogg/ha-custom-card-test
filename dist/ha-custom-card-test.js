@@ -44,7 +44,7 @@ window.customCards.push({
   type: 'ha-custom-card-test',
   name: 'Iain Test Card',
   preview: false,
-  description: 'This card displays stuff',
+  description: 'This card displays things',
 });
 
 
