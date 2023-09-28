@@ -24,6 +24,14 @@ class HaCustomTestCard extends HTMLElement {
     `;
   }
 
+  // The user supplied configuration. Throw an exception and Home Assistant 
+  // will render an error card. 
+  setConfig(config) { 
+    // if (!config.entity) { 
+    //   throw new Error("You need to define an entity"); 
+    // } 
+    this.config = config; 
+  } 
   // The height of your card. Home Assistant uses this to automatically
   // distribute all cards over the available columns.
   getCardSize() {
