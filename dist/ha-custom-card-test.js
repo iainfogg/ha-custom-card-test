@@ -19,7 +19,7 @@ class HaCustomTestCard extends HTMLElement {
     const stateStr = state ? state.state : "unavailable";
 
     this.content.innerHTML = `
-      Predbat's current status is: ${predbatStatus}
+      Predbat's current status is: ${predbatStatus.state}
       <br><br>
     `;
   }
@@ -32,7 +32,7 @@ class HaCustomTestCard extends HTMLElement {
     // } 
     this.config = config; 
   } 
-  
+
   // The height of your card. Home Assistant uses this to automatically
   // distribute all cards over the available columns.
   getCardSize() {
