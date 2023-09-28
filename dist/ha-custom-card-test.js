@@ -37,7 +37,7 @@ class HaCustomTestCard extends HTMLElement {
   getCardSize() {
     return 3;
   }
-}
+} 
 
 customElements.define('ha-custom-card-test', HaCustomTestCard); 
 window.customCards.push({
