@@ -19,7 +19,7 @@ class HaCustomTestCard extends HTMLElement {
     const stateStr = state ? state.state : "unavailable";
 
     this.content.innerHTML = `
-      Predbat's current status is: predbatStatus
+      Predbat's current status is: ${predbatStatus}
       <br><br>
     `;
   }
